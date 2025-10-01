@@ -6,11 +6,17 @@ import org.json.JSONObject;
 
 public class Door {
   private final String id;
-  private boolean closed; // physically
+  private boolean closed;
+  private DoorState state;
 
   public Door(String id) {
     this.id = id;
     closed = true;
+    state = new DoorUnlocked(this);
+  }
+
+  public void setState(DoorState dS) {
+      state = dS;
   }
 
   public void processRequest(RequestReader request) {
@@ -18,13 +24,15 @@ public class Door {
     // its state, and if closed or open
     if (request.isAuthorized()) {
       String action = request.getAction();
-      doAction(action);
+
+      if (!state.changeState(action))
+          System.out.println("Acció no vàlida en aquest estat");
     } else {
       System.out.println("not authorized");
     }
     request.setDoorStateName(getStateName());
   }
-
+/*
   private void doAction(String action) {
     switch (action) {
       case Actions.OPEN:
@@ -56,9 +64,17 @@ public class Door {
         System.exit(-1);
     }
   }
-
+*/
   public boolean isClosed() {
     return closed;
+  }
+
+  public void open() {
+      closed = false;
+  }
+
+  public void close() {
+      closed = true;
   }
 
   public String getId() {
@@ -66,7 +82,7 @@ public class Door {
   }
 
   public String getStateName() {
-    return "unlocked";
+    return state.getStateName();
   }
 
   @Override

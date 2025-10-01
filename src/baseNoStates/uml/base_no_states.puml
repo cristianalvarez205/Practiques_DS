@@ -42,7 +42,7 @@ class DirectoryUsers {
 
 DirectoryUsers --> "*" User : "users"
 
-class Door {
+abstract class Door {
 - id : String
 - closed : boolean
 + Door(id : String)
@@ -55,6 +55,22 @@ class Door {
 '+ getStateName() : String
 - doAction(action : String)
 }
+
+class DoorLocked {
+-doAction(action : String)
+}
+
+class DoorUnlocked {
+-doAction(action : String)
+}
+
+class DoorShortlyUnlocked {
+-doAction(action : String)
+}
+
+Door <|-- DoorLocked
+Door <|-- DoorUnlocked
+Door <|-- DoorShortlyUnlocked
 
 
 class User {
