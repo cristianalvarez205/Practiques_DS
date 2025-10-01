@@ -13,6 +13,7 @@ public class DoorLocked extends DoorState {
                 door.setState(new DoorUnlocked(door));
                 break;
             case Actions.UNLOCK_SHORTLY:
+
                 door.setState(new DoorShortlyUnlocked(door));
                 break;
             default:

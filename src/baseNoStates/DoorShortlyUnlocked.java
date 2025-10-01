@@ -6,9 +6,22 @@ public class DoorShortlyUnlocked extends DoorState {
         stateName = "unlocked_shortly";
     }
 
+    private void loadNewState () {
+        if (!door.isClosed()) {
+            door.setState(new DoorLocked(door));
+        }
+        else {
+            door.setState(new DoorPropped(door));
+        }
+    }
+
+    private boolean timeExpired() {
+        return true;
+    }
+
     @Override
     public boolean changeState(String action) {
-        switch (action){
+        switch (action) {
             case Actions.OPEN:
                 if (door.isClosed())
                     door.open();
@@ -20,12 +33,6 @@ public class DoorShortlyUnlocked extends DoorState {
                     System.out.println("Estas intentant tancar una porta tancada");
                 else
                     door.close();
-                break;
-            case Actions.UNLOCK:
-                if (door.isClosed())
-                    door.setState(new DoorUnlocked(door));
-                else
-                    System.out.println("Estas intentant desbloquejar una porta oberta");
                 break;
             default:
                 return false;
