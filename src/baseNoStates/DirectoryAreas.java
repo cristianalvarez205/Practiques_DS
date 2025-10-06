@@ -3,7 +3,7 @@ package baseNoStates;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public final class DirectoryAreas {
+public abstract class DirectoryAreas {
     private static ArrayList<Area> allAreas = new ArrayList<>();
 
     // Inicialització de totes les areas de l'edifici
@@ -18,21 +18,21 @@ public final class DirectoryAreas {
         Door d8 = DirectoryDoors.findDoorById("D8");
         Door d9 = DirectoryDoors.findDoorById("D9");
 
-        Area exterior = new Area(new Door[]{d1,d3},new Area[]{},"exterior");
-        Area parking = new Area(new Door[]{d1,d2},new Area[]{},"parking");
-        Area stairs = new Area(new Door[]{d2,d4,d7},new Area[]{},"stairs");
-        Area hall = new Area(new Door[]{d4,d3,d5,d6},new Area[]{},"hall");
-        Area room1 = new Area(new Door[]{d5},new Area[]{},"room1");
-        Area room2 = new Area(new Door[]{d6},new Area[]{},"room2");
-        Area corridor = new Area(new Door[]{d7,d8,d9},new Area[]{},"corridor");
-        Area room3 = new Area(new Door[]{d8},new Area[]{},"room3");
-        Area IT = new Area(new Door[]{d9},new Area[]{},"IT");
+        Partition building = new Partition("building",null);
 
-        Area basement = new Area(new Door[]{},new Area[]{parking},"basement");
-        Area ground_floor = new Area(new Door[]{},new Area[]{room1,room2,hall},"ground_floor");
-        Area floor1 = new Area(new Door[]{},new Area[]{room3,corridor,IT},"floor1");
+        Partition basement = new Partition("basement",building);
+        Partition ground_floor = new Partition("ground_floor",building);
+        Partition floor1 = new Partition("floor1",building);
 
-        Area building = new Area(new Door[]{},new Area[]{basement,ground_floor,floor1,stairs,exterior},"building");
+        Space exterior = new Space(new ArrayList<Door>(),"exterior",null);
+        Space parking = new Space(new ArrayList<Door>(Arrays.asList(d1,d2)),"parking",basement);
+        Space stairs = new Space(new ArrayList<Door>(),"stairs",building);
+        Space hall = new Space(new ArrayList<Door>(Arrays.asList(d3,d4)),"hall",ground_floor);
+        Space room1 = new Space(new ArrayList<Door>(Arrays.asList(d5)),"room1",ground_floor);
+        Space room2 = new Space(new ArrayList<Door>(Arrays.asList(d6)),"room2",ground_floor);
+        Space corridor = new Space(new ArrayList<Door>(Arrays.asList(d7)),"corridor",floor1);
+        Space room3 = new Space(new ArrayList<Door>(Arrays.asList(d8)),"room3",floor1);
+        Space IT = new Space(new ArrayList<Door>(Arrays.asList(d9)),"IT",floor1);
         allAreas = new ArrayList<>(Arrays.asList(exterior,parking,stairs,hall,room1,room2,corridor,room3,IT,basement,ground_floor,floor1,building));
     }
 

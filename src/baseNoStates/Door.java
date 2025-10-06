@@ -1,5 +1,6 @@
 package baseNoStates;
 
+import DoorStates.DoorUnlocked;
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
 
@@ -24,47 +25,36 @@ public class Door {
     // its state, and if closed or open
     if (request.isAuthorized()) {
       String action = request.getAction();
-
-      if (!state.changeState(action))
-          System.out.println("Acció no vàlida en aquest estat");
+      doAction(action);
     } else {
       System.out.println("not authorized");
     }
     request.setDoorStateName(getStateName());
   }
-/*
+
   private void doAction(String action) {
     switch (action) {
       case Actions.OPEN:
-        if (closed) {
-          closed = false;
-        } else {
-          System.out.println("Can't open door " + id + " because it's already open");
-        }
+          state.open();
         break;
       case Actions.CLOSE:
-        if (closed) {
-          System.out.println("Can't close door " + id + " because it's already closed");
-        } else {
-          closed = true;
-        }
+          state.close();
         break;
       case Actions.LOCK:
-        // TODO
-        // fall through
+          state.lock();
+        break;
       case Actions.UNLOCK:
-        // TODO
-        // fall through
+          state.unlock();
+        break;
       case Actions.UNLOCK_SHORTLY:
-        // TODO
-        System.out.println("Action " + action + " not implemented yet");
+          state.unlock_shortly();
         break;
       default:
         assert false : "Unknown action " + action;
         System.exit(-1);
     }
   }
-*/
+
   public boolean isClosed() {
     return closed;
   }
