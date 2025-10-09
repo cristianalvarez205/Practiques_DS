@@ -1,47 +1,62 @@
 package baseNoStates;
 
+import baseNoStates.UserGroups.Admin;
+import baseNoStates.UserGroups.Employee;
+import baseNoStates.UserGroups.Guest;
+import baseNoStates.UserGroups.Manager;
+
 import java.util.ArrayList;
 
-public final class DirectoryUsers {
-  private static final ArrayList<User> users = new ArrayList<>();
+public final class DirectoryUserGroups {
+  private static final ArrayList<UserGroup> groups = new ArrayList<>();
 
-  public static void makeUsers() {
+  public static void makeUserGroups() {
     //TODO: make user groups according to the specifications in the comments, because
     // now all are the same
 
     // users without any privilege, just to keep temporally users instead of deleting them,
     // this is to withdraw all permissions but still to keep user data to give back
     // permissions later
-    users.add(new User("Bernat", "12345"));
-    users.add(new User("Blai", "77532"));
+    Guest guest = new Guest();
+    guest.addUser(new User("Bernat", "12345",guest));
+    guest.addUser(new User("Blai", "77532",guest));
+    groups.add(guest);
+
 
     // employees :
     // Sep. 1 this year to Mar. 1 next year
     // week days 9-17h
     // just shortly unlock
     // ground floor, floor1, exterior, stairs (this, for all), that is, everywhere but the parking
-    users.add(new User("Ernest", "74984"));
-    users.add(new User("Eulalia", "43295"));
+    Employee employees = new Employee();
+    employees.addUser(new User("Ernest", "74984",employees));
+    employees.addUser(new User("Eulalia", "43295",employees));
+    groups.add(employees);
 
     // managers :
     // Sep. 1 this year to Mar. 1 next year
     // week days + saturday, 8-20h
     // all actions
     // all spaces
-    users.add(new User("Manel", "95783"));
-    users.add(new User("Marta", "05827"));
+    Manager managers = new Manager();
+    managers.addUser(new User("Manel", "95783",managers));
+    managers.addUser(new User("Marta", "05827",managers));
+    groups.add(managers);
 
     // admin :
     // always=Jan. 1 this year to 2100
     // all days of the week
     // all actions
     // all spaces
-    users.add(new User("Ana", "11343"));
+    Admin admins = new Admin();
+    admins.addUser(new User("Ana", "11343",admins));
+    groups.add(admins);
   }
 
   public static User findUserByCredential(String credential) {
-    for (User user : users) {
-      if (user.getCredential().equals(credential)) {
+    for (UserGroup group : groups) {
+      User user = group.getUser(credential);
+      if (user != null) {
         return user;
       }
     }

@@ -3,10 +3,12 @@ package baseNoStates;
 public class User {
   private final String name;
   private final String credential;
+  private final UserGroup group;
 
-  public User(String name, String credential) {
+  public User(String name, String credential, UserGroup group) {
     this.name = name;
     this.credential = credential;
+    this.group = group;
   }
 
   public String getCredential() {

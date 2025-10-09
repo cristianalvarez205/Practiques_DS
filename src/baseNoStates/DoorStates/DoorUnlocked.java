@@ -1,30 +1,20 @@
-package DoorStates;
+package baseNoStates.DoorStates;
 
 import baseNoStates.Door;
 import baseNoStates.DoorState;
 
-public class DoorShortlyUnlocked extends DoorState {
-    public DoorShortlyUnlocked(Door door){
+public class DoorUnlocked extends DoorState {
+    public DoorUnlocked(Door door){
         super(door);
-        stateName = "unlocked_shortly";
-    }
-
-    private void loadNewState () {
-        if (!door.isClosed()) {
-            door.setState(new DoorLocked(door));
-        }
-        else {
-            door.setState(new DoorPropped(door));
-        }
-    }
-
-    private boolean timeExpired() {
-        return true;
+        stateName = "unlocked";
     }
 
     @Override
     public void lock() {
-        System.out.println("Acció no vàlida en aquest estat");
+        if (door.isClosed())
+            door.setState(new DoorLocked(door));
+        else
+            System.out.println("Estas intentant bloquejar una porta oberta");
     }
 
     @Override
@@ -34,8 +24,10 @@ public class DoorShortlyUnlocked extends DoorState {
 
     @Override
     public void open() {
-        if (door.isClosed())
+        if (door.isClosed()) {
+            System.out.println("Abriendo puerta");
             door.open();
+        }
         else
             System.out.println("Estas intentant obrir una porta oberta");
     }

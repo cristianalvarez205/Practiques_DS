@@ -1,4 +1,4 @@
-package DoorStates;
+package baseNoStates.DoorStates;
 
 import baseNoStates.Actions;
 import baseNoStates.Door;

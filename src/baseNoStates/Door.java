@@ -1,6 +1,6 @@
 package baseNoStates;
 
-import DoorStates.DoorUnlocked;
+import baseNoStates.DoorStates.DoorUnlocked;
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
 
