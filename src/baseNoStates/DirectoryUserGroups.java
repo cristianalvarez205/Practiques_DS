@@ -22,22 +22,12 @@ public final class DirectoryUserGroups {
     guest.addUser(new User("Blai", "77532",guest));
     groups.add(guest);
 
-
-    // employees :
-    // Sep. 1 this year to Mar. 1 next year
-    // week days 9-17h
-    // just shortly unlock
-    // ground floor, floor1, exterior, stairs (this, for all), that is, everywhere but the parking
     Employee employees = new Employee();
     employees.addUser(new User("Ernest", "74984",employees));
     employees.addUser(new User("Eulalia", "43295",employees));
     groups.add(employees);
 
-    // managers :
-    // Sep. 1 this year to Mar. 1 next year
-    // week days + saturday, 8-20h
-    // all actions
-    // all spaces
+
     Manager managers = new Manager();
     managers.addUser(new User("Manel", "95783",managers));
     managers.addUser(new User("Marta", "05827",managers));

@@ -4,16 +4,23 @@ import baseNoStates.DoorStates.DoorUnlocked;
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
 
+import java.util.Observer;
+
 
 public class Door {
   private final String id;
   private boolean closed;
   private DoorState state;
+  private String fromSpace;
+  private String toSpace;
+  // private static final Clock clock = new Clock();
 
-  public Door(String id) {
+  public Door(String id,String fromSpace,String toSpace) {
     this.id = id;
     closed = true;
     state = new DoorUnlocked(this);
+    this.fromSpace = fromSpace;
+    this.toSpace = toSpace;
   }
 
   public void setState(DoorState dS) {
@@ -48,6 +55,7 @@ public class Door {
         break;
       case Actions.UNLOCK_SHORTLY:
           state.unlock_shortly();
+
         break;
       default:
         assert false : "Unknown action " + action;
@@ -91,4 +99,12 @@ public class Door {
     json.put("closed", closed);
     return json;
   }
+
+    public Object getFromSpace() {
+      return fromSpace;
+    }
+
+    public Object getToSpace() {
+      return toSpace;
+    }
 }

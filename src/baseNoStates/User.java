@@ -1,5 +1,7 @@
 package baseNoStates;
 
+import java.time.LocalDateTime;
+
 public class User {
   private final String name;
   private final String credential;
@@ -19,4 +21,11 @@ public class User {
   public String toString() {
     return "User{name=" + name + ", credential=" + credential + "}";
   }
+
+    public boolean authorize(LocalDateTime now, Door door, String action) {
+        return (group.canSendRequests(now) &&
+        group.canBeInSpace(door.getFromSpace()) &&
+        group.canBeInSpace(door.getToSpace()) &&
+        group.canDoAction(action));
+    }
 }

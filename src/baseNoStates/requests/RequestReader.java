@@ -1,9 +1,7 @@
 package baseNoStates.requests;
 
-import baseNoStates.DirectoryDoors;
-import baseNoStates.DirectoryUserGroups;
-import baseNoStates.Door;
-import baseNoStates.User;
+import baseNoStates.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -97,7 +95,7 @@ public class RequestReader implements Request {
     } else {
       //TODO: get the who, where, when and what in order to decide, and if not
       // authorized add the reason(s)
-      authorized = true;
+      authorized = user.authorize(now,door,action);
     }
   }
 }
