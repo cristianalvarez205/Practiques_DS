@@ -29,7 +29,7 @@ public class Manager extends UserGroup {
             return false;
 
         int hour = now.getHour();
-        return hour < 8 || hour > 20;
+        return hour >= 8 && hour <= 20;
     }
 
     @Override
