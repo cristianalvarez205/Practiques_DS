@@ -33,11 +33,6 @@ public final class DirectoryUserGroups {
     managers.addUser(new User("Marta", "05827",managers));
     groups.add(managers);
 
-    // admin :
-    // always=Jan. 1 this year to 2100
-    // all days of the week
-    // all actions
-    // all spaces
     Admin admins = new Admin();
     admins.addUser(new User("Ana", "11343",admins));
     groups.add(admins);
