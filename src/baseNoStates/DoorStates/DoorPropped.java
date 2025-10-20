@@ -10,17 +10,6 @@ public class DoorPropped extends DoorState {
         stateName = "propped";
     }
 
-    public boolean changeState(String action) {
-        switch (action) {
-            case Actions.CLOSE:
-
-                break;
-            default:
-                return false;
-        }
-        return true;
-    }
-
     @Override
     public void lock() {
         System.out.println("Acció no vàlida en aquest estat");
