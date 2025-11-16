@@ -91,10 +91,8 @@ public class RequestReader implements Request {
   private void authorize(User user, Door door) {
     if (user == null) {
       authorized = false;
-      addReason("user doesn't exists");
+      addReason("user doesn't exist");
     } else {
-      //TODO: get the who, where, when and what in order to decide, and if not
-      // authorized add the reason(s)
       authorized = user.authorize(now,door,action);
     }
   }

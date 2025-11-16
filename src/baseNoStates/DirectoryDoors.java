@@ -2,9 +2,10 @@ package baseNoStates;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public final class DirectoryDoors {
-  private static ArrayList<Door> allDoors;
+  private static final List<Door> allDoors = new ArrayList<>();
 
   public static void makeDoors() {
     // basement
@@ -22,7 +23,19 @@ public final class DirectoryDoors {
     Door d8 = new Door("D8","corridor","room3"); // corridor, room3
     Door d9 = new Door("D9","corridor","IT"); // corridor, IT
 
-    allDoors = new ArrayList<>(Arrays.asList(d1, d2, d3, d4, d5, d6, d7, d8, d9));
+    allDoors.addAll(
+        Arrays.asList(
+            d1,
+            d2,
+            d3,
+            d4,
+            d5,
+            d6,
+            d7,
+            d8,
+            d9
+        )
+    );
   }
 
   public static Door findDoorById(String id) {
@@ -32,13 +45,12 @@ public final class DirectoryDoors {
       }
     }
     System.out.println("door with id " + id + " not found");
-    return null; // otherwise we get a Java error
+    return null;
   }
 
   // this is needed by RequestRefresh
-  public static ArrayList<Door> getAllDoors() {
+  public static List<Door> getAllDoors() {
     System.out.println(allDoors);
     return allDoors;
   }
-
 }

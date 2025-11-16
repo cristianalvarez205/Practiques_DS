@@ -22,10 +22,10 @@ public class User {
     return "User{name=" + name + ", credential=" + credential + "}";
   }
 
-    public boolean authorize(LocalDateTime now, Door door, String action) {
-        return (group.canSendRequests(now) &&
-        group.canBeInSpace(door.getFromSpace()) &&
-        group.canBeInSpace(door.getToSpace()) &&
-        group.canDoAction(action));
-    }
+  public boolean authorize(LocalDateTime now, Door door, String action) {
+      return group.canSendRequests(now) &&
+             group.canBeInSpace(door.getFromSpace()) &&
+             group.canBeInSpace(door.getToSpace()) &&
+             group.canDoAction(action);
+  }
 }

@@ -11,6 +11,11 @@ import java.time.temporal.TemporalAmount;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Represents a state where the door is unlocked for a short time.
+ * After 10 seconds, it will automatically change to either locked or propped.
+ */
+
 public class DoorShortlyUnlocked extends DoorState implements Observer {
     private LocalDateTime start;
 
@@ -18,7 +23,7 @@ public class DoorShortlyUnlocked extends DoorState implements Observer {
         super(door);
         stateName = "unlocked_shortly";
         start = LocalDateTime.now();
-        Main.clock.addObserver(this);
+        Clock.getInstance().addObserver(this);
     }
 
     private void loadNewState () {
@@ -32,12 +37,12 @@ public class DoorShortlyUnlocked extends DoorState implements Observer {
 
     @Override
     public void lock() {
-        System.out.println("Acció no vàlida en aquest estat");
+        System.out.println(INVALID_ACTION_MESSAGE);
     }
 
     @Override
     public void unlock() {
-        System.out.println("Acció no vàlida en aquest estat");
+        System.out.println(INVALID_ACTION_MESSAGE);
     }
 
     @Override
@@ -45,33 +50,33 @@ public class DoorShortlyUnlocked extends DoorState implements Observer {
         if (door.isClosed())
             door.open();
         else
-            System.out.println("Estas intentant obrir una porta oberta");
+            System.out.println("You are trying to open an already open door.");
     }
 
     @Override
     public void close() {
         if (door.isClosed())
-            System.out.println("Estas intentant tancar una porta tancada");
+            System.out.println("You are trying to close a door that is already closed.");
         else
             door.close();
     }
 
     @Override
     public void unlock_shortly() {
-        System.out.println("Acció no vàlida en aquest estat");
+        System.out.println(INVALID_ACTION_MESSAGE);
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable observable, Object arg) {
         check10s(start,(LocalDateTime) arg);
     }
 
-    private void check10s(LocalDateTime start, LocalDateTime arg) {
-        if (start.plusSeconds(10).isBefore(arg))
+    private void check10s(LocalDateTime start, LocalDateTime currentTime) {
+        if (start.plusSeconds(10).isBefore(currentTime))
         {
-            Main.clock.deleteObserver(this);
+            Clock.getInstance().deleteObserver(this);
             loadNewState();
-            System.out.println("A acabat");
+            System.out.println("The short unlock period has ended.");
         }
 
     }

@@ -1,10 +1,11 @@
 package baseNoStates;
 
 public abstract class DoorState {
+    protected static final String INVALID_ACTION_MESSAGE = "Invalid action in this state.";
     protected Door door;
     protected String stateName;
     public DoorState(Door d) {
-        door = d;
+      door = d;
     }
 
     public String getStateName() {

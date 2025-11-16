@@ -4,8 +4,14 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents a group of users with different privileges and permissions.
+ * Each group has different access to perform actions or access spaces.
+ */
+
 public abstract class UserGroup {
-    Map<String,User> users = new HashMap<>();
+
+    private final Map<String,User> users = new HashMap<>();
 
     protected UserGroup() {
     }

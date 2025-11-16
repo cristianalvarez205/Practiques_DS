@@ -1,6 +1,6 @@
 package baseNoStates;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Area {
     private final String areaId;
@@ -9,9 +9,12 @@ public abstract class Area {
         this.areaId = areaId;
     }
 
-    public abstract ArrayList<Door> getDoorsGivingAccess();
+  /**
+   * Returns the list of doors that provide access to this area.
+   */
+    public abstract List<Door> getAccessibleDoors();
 
-    public Object getId() {
-        return areaId;
+    public String getId() {
+      return areaId;
     }
 }

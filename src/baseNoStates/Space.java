@@ -1,18 +1,21 @@
 package baseNoStates;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Space extends Area {
-    ArrayList<Door> doors = new ArrayList<>();
-    Space(ArrayList<Door> doors,String areaId, Partition father) {
+    private final List<Door> doors;
+    Space(List<Door> doors,String areaId, Partition father) {
         super(areaId);
-        this.doors = doors;
-        if (father != null)
+        this.doors = new ArrayList<>(doors);
+
+        if (father != null) {
             father.addArea(this);
+        }
     }
 
     @Override
-    public ArrayList<Door> getDoorsGivingAccess() {
+    public List<Door> getAccessibleDoors() {
         return doors;
     }
 }

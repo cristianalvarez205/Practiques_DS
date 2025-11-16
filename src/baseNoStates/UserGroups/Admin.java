@@ -5,18 +5,19 @@ import baseNoStates.UserGroup;
 import java.time.LocalDateTime;
 import java.time.Month;
 
+/**
+ * Admin user group with unrestricted permissions.
+ * Can send requests anytime, be in any space, and perform any action.
+ * Always=Jan. 1 this year to 2100
+ */
+
 public class Admin extends UserGroup {
-    // admin :
-    // always=Jan. 1 this year to 2100
-    // all days of the week
-    // all actions
-    // all spaces
+    private static final LocalDateTime START_DATE = LocalDateTime.of(LocalDateTime.now().getYear(), Month.JANUARY, 1, 0, 0);
+    private static final LocalDateTime END_DATE = LocalDateTime.of(2100, Month.JANUARY, 1, 0, 0);
+    
     @Override
     public boolean canSendRequests(LocalDateTime now) {
-        int year = now.getYear();
-        LocalDateTime start = LocalDateTime.of(year, Month.JANUARY, 1, 0, 0);
-        LocalDateTime end = LocalDateTime.of(2100, Month.JANUARY, 1, 0, 0);
-        return isInRange(now,start,end);
+        return isInRange(now, START_DATE, END_DATE);
     }
 
     @Override

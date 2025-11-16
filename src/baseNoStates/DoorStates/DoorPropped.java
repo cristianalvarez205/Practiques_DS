@@ -4,7 +4,13 @@ import baseNoStates.Actions;
 import baseNoStates.Door;
 import baseNoStates.DoorState;
 
+/**
+ * Represents the 'propped' state of a door.
+ * The door is slightly open but can be locked by closing it completely.
+ */
+
 public class DoorPropped extends DoorState {
+
     DoorPropped(Door door){
         super(door);
         stateName = "propped";
@@ -12,17 +18,17 @@ public class DoorPropped extends DoorState {
 
     @Override
     public void lock() {
-        System.out.println("Acció no vàlida en aquest estat");
+        System.out.println(INVALID_ACTION_MESSAGE);
     }
 
     @Override
     public void unlock() {
-        System.out.println("Acció no vàlida en aquest estat");
+        System.out.println(INVALID_ACTION_MESSAGE);
     }
 
     @Override
     public void open() {
-        System.out.println("Acció no vàlida en aquest estat");
+        System.out.println(INVALID_ACTION_MESSAGE);
     }
 
     @Override
@@ -33,6 +39,6 @@ public class DoorPropped extends DoorState {
 
     @Override
     public void unlock_shortly() {
-        System.out.println("Acció no vàlida en aquest estat");
+        System.out.println(INVALID_ACTION_MESSAGE);
     }
 }

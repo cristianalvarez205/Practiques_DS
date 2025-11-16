@@ -3,6 +3,11 @@ package baseNoStates.DoorStates;
 import baseNoStates.Door;
 import baseNoStates.DoorState;
 
+/**
+ * Represents the state of a door being unlocked.
+ * Allows actions like closing, opening, and locking the door.
+ */
+
 public class DoorUnlocked extends DoorState {
     public DoorUnlocked(Door door){
         super(door);
@@ -14,34 +19,34 @@ public class DoorUnlocked extends DoorState {
         if (door.isClosed())
             door.setState(new DoorLocked(door));
         else
-            System.out.println("Estas intentant bloquejar una porta oberta");
+            System.out.println("You are trying to lock an open door.");
     }
 
     @Override
     public void unlock() {
-        System.out.println("Acció no vàlida en aquest estat");
+        System.out.println(INVALID_ACTION_MESSAGE);
     }
 
     @Override
     public void open() {
         if (door.isClosed()) {
-            System.out.println("Abriendo puerta");
+            System.out.println("Opening door");
             door.open();
         }
         else
-            System.out.println("Estas intentant obrir una porta oberta");
+            System.out.println("You are trying to open an already open door.");
     }
 
     @Override
     public void close() {
         if (door.isClosed())
-            System.out.println("Estas intentant tancar una porta tancada");
+            System.out.println("You are trying to close a door that is already closed.");
         else
             door.close();
     }
 
     @Override
     public void unlock_shortly() {
-        System.out.println("Acció no vàlida en aquest estat");
+        System.out.println(INVALID_ACTION_MESSAGE);
     }
 }

@@ -2,11 +2,11 @@ package baseNoStates;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class DirectoryAreas {
-    private static ArrayList<Area> allAreas = new ArrayList<>();
+    private static final List<Area> allAreas = new ArrayList<>();
 
-    // Inicialització de totes les areas de l'edifici
     public static void makeAreas() {
         Door d1 = DirectoryDoors.findDoorById("D1");
         Door d2 = DirectoryDoors.findDoorById("D2");
@@ -33,7 +33,24 @@ public abstract class DirectoryAreas {
         Space corridor = new Space(new ArrayList<Door>(Arrays.asList(d7)),"corridor",floor1);
         Space room3 = new Space(new ArrayList<Door>(Arrays.asList(d8)),"room3",floor1);
         Space IT = new Space(new ArrayList<Door>(Arrays.asList(d9)),"IT",floor1);
-        allAreas = new ArrayList<>(Arrays.asList(exterior,parking,stairs,hall,room1,room2,corridor,room3,IT,basement,ground_floor,floor1,building));
+
+        allAreas.addAll(
+            Arrays.asList(
+                exterior,
+                parking,
+                stairs,
+                hall,
+                room1,
+                room2,
+                corridor,
+                room3,
+                IT,
+                basement,
+                ground_floor,
+                floor1,
+                building
+            )
+        );
     }
 
     public static Area findAreaById(String id) {
@@ -43,6 +60,6 @@ public abstract class DirectoryAreas {
             }
         }
         System.out.println("area with id " + id + " not found");
-        return null; // otherwise we get a Java error
+        return null;
     }
 }

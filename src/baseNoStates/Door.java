@@ -4,16 +4,12 @@ import baseNoStates.DoorStates.DoorUnlocked;
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
 
-import java.util.Observer;
-
-
 public class Door {
   private final String id;
   private boolean closed;
   private DoorState state;
   private String fromSpace;
   private String toSpace;
-  // private static final Clock clock = new Clock();
 
   public Door(String id,String fromSpace,String toSpace) {
     this.id = id;
@@ -24,18 +20,17 @@ public class Door {
   }
 
   public void setState(DoorState dS) {
-      state = dS;
+    state = dS;
   }
 
   public void processRequest(RequestReader request) {
-    // it is the Door that process the request because the door has and knows
-    // its state, and if closed or open
+    // The door processes the request because it knows its state
     if (request.isAuthorized()) {
-      String action = request.getAction();
-      doAction(action);
+      doAction(request.getAction());
     } else {
-      System.out.println("not authorized");
+      System.out.println("Not authorized");
     }
+
     request.setDoorStateName(getStateName());
   }
 
@@ -44,22 +39,25 @@ public class Door {
       case Actions.OPEN:
           state.open();
         break;
+
       case Actions.CLOSE:
           state.close();
         break;
+
       case Actions.LOCK:
           state.lock();
         break;
+
       case Actions.UNLOCK:
           state.unlock();
         break;
+
       case Actions.UNLOCK_SHORTLY:
           state.unlock_shortly();
-
         break;
+
       default:
-        assert false : "Unknown action " + action;
-        System.exit(-1);
+        throw new IllegalArgumentException("Unknown action: " + action);
     }
   }
 
@@ -68,11 +66,11 @@ public class Door {
   }
 
   public void open() {
-      closed = false;
+    closed = false;
   }
 
   public void close() {
-      closed = true;
+    closed = true;
   }
 
   public String getId() {
@@ -85,11 +83,11 @@ public class Door {
 
   @Override
   public String toString() {
-    return "Door{"
-        + ", id='" + id + '\''
-        + ", closed=" + closed
-        + ", state=" + getStateName()
-        + "}";
+    return "Door{" +
+        ", id='" + id + '\'' +
+        ", closed=" + closed +
+        ", state=" + getStateName() +
+        '}';
   }
 
   public JSONObject toJson() {
@@ -101,10 +99,10 @@ public class Door {
   }
 
     public Object getFromSpace() {
-      return fromSpace;
+    return fromSpace;
     }
 
     public Object getToSpace() {
-      return toSpace;
+    return toSpace;
     }
 }

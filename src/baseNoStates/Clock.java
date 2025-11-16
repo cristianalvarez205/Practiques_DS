@@ -7,13 +7,22 @@ import java.util.TimerTask;
 
 public class Clock extends Observable {
 
-    private LocalDateTime date;
-    private Timer timer;
-    private int period; // seconds
+    private static Clock instance;
 
-    public Clock(int period) {
+    private LocalDateTime date;
+    private final Timer timer;
+    private final int period; // seconds
+
+    private Clock(int period) {
         this.period = period;
         timer = new Timer();
+    }
+
+    public static synchronized Clock getInstance() {
+      if (instance == null) {
+        instance = new Clock(1); // valor per defecte
+      }
+      return instance;
     }
 
     public void start() {
@@ -27,19 +36,18 @@ public class Clock extends Observable {
                 notifyObservers(date);
             }
         };
-        timer.scheduleAtFixedRate(repeatedTask, 0, 1000 * period);
+        timer.scheduleAtFixedRate(repeatedTask, 0, 1000L * period);
     }
 
     public void stop() {
-        timer.cancel();
+      timer.cancel();
     }
 
     public int getPeriod() {
-        return period;
+      return period;
     }
 
     public LocalDateTime getDate() {
-        return date;
+      return date;
     }
 }
-
