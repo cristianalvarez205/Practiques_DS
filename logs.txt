@@ -1,50 +1,13 @@
-18:22:40 [main] INFO  baseNoStates.Clock - Clock started with period of 1 seconds
-18:22:40 [main] INFO  baseNoStates.DirectoryUserGroups - All user groups created successfully: 4 groups, total users loaded
-18:22:40 [main] INFO  baseNoStates.WebServer - Server started on port 8080
-18:22:47 [Thread-3] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to open door D1
-18:22:47 [Thread-3] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D1 opening (state: UNLOCKED)
-18:22:50 [Thread-4] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to open door D4
-18:22:50 [Thread-4] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D4 opening (state: UNLOCKED)
-18:22:53 [Thread-5] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D3
-18:22:53 [Thread-5] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D3 changing state: UNLOCKED -> LOCKED
-18:22:54 [Thread-6] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D3
-18:22:54 [Thread-6] WARN  baseNoStates.DoorStates.DoorLocked - Door D3 - Invalid action: trying to lock an already locked door
-18:22:56 [Thread-7] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to unlock_shortly door D3
-18:22:56 [Thread-7] INFO  baseNoStates.DoorStates.DoorLocked - Door D3 changing state: LOCKED -> UNLOCKED_SHORTLY
-18:22:56 [Thread-7] INFO  b.DoorStates.DoorShortlyUnlocked - Door D3 entered UNLOCKED_SHORTLY state (10 seconds timer started)
-18:22:59 [Thread-8] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to open door D3
-18:22:59 [Thread-8] INFO  b.DoorStates.DoorShortlyUnlocked - Door D3 opening (state: UNLOCKED_SHORTLY)
-18:23:06 [Timer-0] INFO  b.DoorStates.DoorShortlyUnlocked - Door D3 changing state: UNLOCKED_SHORTLY -> PROPPED (timer expired, door was open)
-18:23:06 [Timer-0] WARN  baseNoStates.DoorStates.DoorPropped - Door D3 has entered PROPPED state
-18:23:06 [Timer-0] INFO  b.DoorStates.DoorShortlyUnlocked - Door D3 - Short unlock period (10s) has ended
-18:23:12 [Thread-46] INFO  baseNoStates.User - Authorization SUCCESS: User Eulalia authorized to open door D8
-18:23:12 [Thread-46] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D8 opening (state: UNLOCKED)
-18:23:16 [Thread-47] WARN  baseNoStates.User - Authorization FAILED: User Eulalia cannot lock door D9 - Reasons: canSendRequests=true, canBeInFromSpace=true, canBeInToSpace=true, canDoAction=false
-18:23:19 [Thread-48] INFO  baseNoStates.User - Authorization SUCCESS: User Eulalia authorized to open door D9
-18:23:19 [Thread-48] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D9 opening (state: UNLOCKED)
-18:23:21 [Thread-49] INFO  baseNoStates.User - Authorization SUCCESS: User Eulalia authorized to close door D9
-18:23:21 [Thread-49] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D9 closing (state: UNLOCKED)
-18:23:26 [Thread-50] WARN  baseNoStates.User - Authorization FAILED: User Eulalia cannot open door D2 - Reasons: canSendRequests=true, canBeInFromSpace=true, canBeInToSpace=false, canDoAction=true
-18:23:27 [Thread-51] WARN  baseNoStates.User - Authorization FAILED: User Eulalia cannot open door D2 - Reasons: canSendRequests=true, canBeInFromSpace=true, canBeInToSpace=false, canDoAction=true
-18:23:40 [Thread-52] INFO  baseNoStates.requests.RequestArea - Processing area request: credential=11343, action=lock, area=building
-18:23:40 [Thread-52] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D1
-18:23:40 [Thread-52] WARN  baseNoStates.DoorStates.DoorUnlocked - Door D1 - Invalid action: trying to lock an open door
-18:23:40 [Thread-52] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D2
-18:23:40 [Thread-52] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D2 changing state: UNLOCKED -> LOCKED
-18:23:40 [Thread-52] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D3
-18:23:40 [Thread-52] WARN  baseNoStates.DoorStates.DoorPropped - Door D3 - Invalid action: trying to lock from propped state
-18:23:40 [Thread-52] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D4
-18:23:40 [Thread-52] WARN  baseNoStates.DoorStates.DoorUnlocked - Door D4 - Invalid action: trying to lock an open door
-18:23:40 [Thread-52] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D5
-18:23:40 [Thread-52] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D5 changing state: UNLOCKED -> LOCKED
-18:23:40 [Thread-52] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D6
-18:23:40 [Thread-52] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D6 changing state: UNLOCKED -> LOCKED
-18:23:40 [Thread-52] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D7
-18:23:40 [Thread-52] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D7 changing state: UNLOCKED -> LOCKED
-18:23:40 [Thread-52] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D8
-18:23:40 [Thread-52] WARN  baseNoStates.DoorStates.DoorUnlocked - Door D8 - Invalid action: trying to lock an open door
-18:23:40 [Thread-52] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to lock door D9
-18:23:40 [Thread-52] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D9 changing state: UNLOCKED -> LOCKED
-18:23:40 [Thread-52] INFO  baseNoStates.requests.RequestArea - Area request processed: 9 door requests created for area building
-18:23:47 [Thread-53] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to close door D3
-18:23:47 [Thread-53] INFO  baseNoStates.DoorStates.DoorPropped - Door D3 changing state: PROPPED -> LOCKED
+18:42:27 [main] INFO  baseNoStates.Clock - Clock started with period of 1 seconds
+18:42:33 [Thread-2] INFO  baseNoStates.Visitors.FindAreaById - Found target area (Space): parking
+18:42:33 [Thread-2] INFO  b.Visitors.GetDoorsGivingAccess - Total doors collected: 2
+18:42:35 [Thread-3] INFO  baseNoStates.Visitors.FindAreaById - Found target area (Space): room1
+18:42:35 [Thread-3] INFO  b.Visitors.GetDoorsGivingAccess - Total doors collected: 1
+18:42:39 [Thread-4] INFO  baseNoStates.Visitors.FindAreaById - Found target area (Space): hall
+18:42:39 [Thread-4] INFO  b.Visitors.GetDoorsGivingAccess - Total doors collected: 2
+18:42:41 [Thread-5] INFO  baseNoStates.Visitors.FindAreaById - Found target area (Space): hall
+18:42:41 [Thread-5] INFO  b.Visitors.GetDoorsGivingAccess - Total doors collected: 2
+18:42:47 [Thread-6] INFO  baseNoStates.Visitors.FindAreaById - Found target area (Space): room3
+18:42:47 [Thread-6] INFO  b.Visitors.GetDoorsGivingAccess - Total doors collected: 1
+18:42:52 [Thread-7] INFO  baseNoStates.Visitors.FindAreaById - Found target area (Space): IT
+18:42:52 [Thread-7] INFO  b.Visitors.GetDoorsGivingAccess - Total doors collected: 1

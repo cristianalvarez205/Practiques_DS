@@ -44,6 +44,7 @@ public abstract class DirectoryAreas {
     }
 
     public static Area findAreaById(String id) {
+        logger.debug("Searching for area with id: {}", id);
         visitor = new FindAreaById(id);
         root.acceptVisitor(visitor);
         return ((FindAreaById)visitor).getTargetArea();

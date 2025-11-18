@@ -31,31 +31,32 @@
     <!-- OPCIÓN 1: Solo logs de FITA 1 (Composite, State, Observer, UserGroups) -->
     <!--
     <logger name="baseNoStates" level="OFF"/>
-    <logger name="baseNoStates.Door" level="DEBUG"/>
-    <logger name="baseNoStates.DoorStates" level="DEBUG"/>
-    <logger name="baseNoStates.User" level="DEBUG"/>
-    <logger name="baseNoStates.UserGroups" level="DEBUG"/>
-    <logger name="baseNoStates.DirectoryUserGroups" level="DEBUG"/>
-    <logger name="baseNoStates.Clock" level="DEBUG"/>
-    <logger name="baseNoStates.WebServer" level="DEBUG"/>
-    <logger name="baseNoStates.Main" level="DEBUG"/>
-    <logger name="baseNoStates.DirectoryDoors" level="DEBUG"/>
-    <logger name="baseNoStates.requests" level="DEBUG"/>
-    <logger name="baseNoStates.Area" level="DEBUG"/>
-    <logger name="baseNoStates.AreaTypes.Space" level="DEBUG"/>
-    <logger name="baseNoStates.AreaTypes.Partition" level="DEBUG"/>
+    <logger name="baseNoStates.Door" level="INFO"/>
+    <logger name="baseNoStates.DoorStates" level="INFO"/>
+    <logger name="baseNoStates.User" level="INFO"/>
+    <logger name="baseNoStates.UserGroups" level="INFO"/>
+    <logger name="baseNoStates.DirectoryUserGroups" level="INFO"/>
+    <logger name="baseNoStates.Clock" level="INFO"/>
+    <logger name="baseNoStates.WebServer" level="INFO"/>
+    <logger name="baseNoStates.Main" level="INFO"/>
+    <logger name="baseNoStates.DirectoryDoors" level="INFO"/>
+    <logger name="baseNoStates.requests" level="INFO"/>
+    <logger name="baseNoStates.Area" level="INFO"/>
+    <logger name="baseNoStates.AreaTypes.Space" level="INFO"/>
+    <logger name="baseNoStates.AreaTypes.Partition" level="INFO"/>
     -->
 
     <!-- OPCIÓN 2: Solo logs de FITA 2 (Visitor, Singleton) -->
-    <!--
     <logger name="baseNoStates" level="OFF"/>
-    <logger name="baseNoStates.Visitors" level="DEBUG"/>
-    <logger name="baseNoStates.DirectoryAreas" level="DEBUG"/>
-    <logger name="baseNoStates.Clock" level="DEBUG"/>
-    -->
+    <logger name="baseNoStates.Visitors" level="INFO"/>
+    <logger name="baseNoStates.DirectoryAreas" level="INFO"/>
+    <logger name="baseNoStates.Clock" level="INFO"/>
+
 
     <!-- OPCIÓN 3: Logs de todas las clases (FITA 1 + FITA 2) -->
+    <!--
     <logger name="baseNoStates" level="INFO"/>
+    -->
 
     <!-- Configuración del root logger -->
     <root level="INFO">
