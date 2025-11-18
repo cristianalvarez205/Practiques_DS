@@ -28,6 +28,7 @@ public class Clock extends Observable {
     public static synchronized Clock getInstance() {
       if (instance == null) {
         instance = new Clock(1); // default period (seconds)
+        logger.debug("Clock singleton instance created with period {} seconds", instance.period);
       }
       return instance;
     }
@@ -40,11 +41,13 @@ public class Clock extends Observable {
      **/
 
     public void start() {
+        logger.info("Clock started with period of {} seconds", period);
         TimerTask repeatedTask = new TimerTask() {
             @Override
             //modify the abstract function of the class TimerTask for our instance repeatedTask
             public void run() {
                 date = LocalDateTime.now();
+                logger.debug("Clock tick at {}, notifying observers", date);
                 setChanged();
                 notifyObservers(date);
             }
@@ -54,6 +57,7 @@ public class Clock extends Observable {
     }
 
     public void stop() {
+      logger.info("Clock stopped");
       timer.cancel();
     }
 

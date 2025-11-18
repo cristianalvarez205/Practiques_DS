@@ -30,14 +30,18 @@ public class WebServer {
   public WebServer() {
     try {
       ServerSocket serverConnect = new ServerSocket(PORT);
+      logger.info("Server started on port {}", PORT);
       System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
       // we listen until user halts server execution
       while (true) {
         // each client connection will be managed in a dedicated Thread
-        new SocketThread(serverConnect.accept());
+        Socket clientSocket = serverConnect.accept();
+        logger.debug("New client connection accepted from {}", clientSocket.getInetAddress());
+        new SocketThread(clientSocket);
         // create dedicated thread to manage the client connection
       }
     } catch (IOException e) {
+      logger.error("Server connection error: {}", e.getMessage());
       System.err.println("Server Connection error : " + e.getMessage());
     }
   }
@@ -68,15 +72,18 @@ public class WebServer {
         String input = in.readLine();
         // we parse the request with a string tokenizer
 
+        logger.debug("HTTP request received: {}", input);
         System.out.println("sockedthread : " + input);
 
         StringTokenizer parse = new StringTokenizer(input);
         String method = parse.nextToken().toUpperCase(); // we get the HTTP method of the client
         if (!method.equals("GET")) {
+          logger.warn("Method not implemented: {}", method);
           System.out.println("501 Not Implemented : " + method + " method.");
         } else {
           // what comes after "localhost:8080"
           resource = parse.nextToken();
+          logger.debug("Parsing resource: {}", resource);
           System.out.println("input " + input);
           System.out.println("method " + method);
           System.out.println("resource " + resource);
@@ -94,8 +101,10 @@ public class WebServer {
           Request request = makeRequest(tokens);
           if (request != null) {
             String typeRequest = tokens[0];
+            logger.debug("Request created: type={}, details={}", typeRequest, request);
             System.out.println("created request " + typeRequest + " " + request);
             request.process();
+            logger.debug("Request processed: type={}", typeRequest);
             System.out.println("processed request " + typeRequest + " " + request);
             // Make the answer as a JSON string, to be sent to the Javascript client
             String answer = makeJsonAnswer(request);
@@ -110,6 +119,7 @@ public class WebServer {
         out.close();
         insocked.close(); // we close socket connection
       } catch (Exception e) {
+        logger.error("Exception in SocketThread: {}", e.getMessage());
         System.err.println("Exception : " + e);
       }
     }

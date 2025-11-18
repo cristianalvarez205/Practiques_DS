@@ -35,8 +35,10 @@ public class RequestRefresh implements Request {
   // works or not, retrieves the state of all the doors so that the simulator can
   // repaint the readers
   public void process() {
+    logger.debug("Processing refresh request - retrieving all doors state");
     for (Door door : DirectoryDoors.getAllDoors()) {
       jsonsDoors.add(door.toJson());
     }
+    logger.debug("Refresh request processed: {} doors retrieved", jsonsDoors.size());
   }
 }

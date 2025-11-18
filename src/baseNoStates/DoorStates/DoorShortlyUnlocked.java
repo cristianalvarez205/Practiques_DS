@@ -89,7 +89,7 @@ public class DoorShortlyUnlocked extends DoorState implements Observer {
         {
             Clock.getInstance().deleteObserver(this);
             loadNewState();
-            logger.debug("Door {} - Short unlock period (10s) has ended", door.getId());
+            logger.info("Door {} - Short unlock period (10s) has ended", door.getId());
         }
 
     }

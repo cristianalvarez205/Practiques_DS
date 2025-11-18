@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class RequestArea implements Request {
@@ -76,6 +77,7 @@ public class RequestArea implements Request {
   public void process() {
     // commented out until Area, Space and Partition are implemented
 
+    logger.info("Processing area request: credential={}, action={}, area={}", credential, action, areaId);
 
     // make the door requests and put them into the area request to be authorized later and
     // processed later
@@ -89,13 +91,16 @@ public class RequestArea implements Request {
       // Look for the doors in the spaces of this area that give access to them.
       visitor = new GetDoorsGivingAccess();
       area.acceptVisitor(visitor);
-      for (Door door : ((GetDoorsGivingAccess)visitor).getDoorsGivingAccess()) {
+      List<Door> doorsToProcess = ((GetDoorsGivingAccess)visitor).getDoorsGivingAccess();
+      logger.debug("Area {} has {} doors to process", areaId, doorsToProcess.size());
+      for (Door door : doorsToProcess) {
         RequestReader requestReader = new RequestReader(credential, action, now, door.getId());
         requestReader.process();
         // after process() the area request contains the answer as the answer
         // to each individual door request, that is read by the simulator/Flutter app
         requests.add(requestReader);
       }
+      logger.info("Area request processed: {} door requests created for area {}", requests.size(), areaId);
     }
   }
 }
