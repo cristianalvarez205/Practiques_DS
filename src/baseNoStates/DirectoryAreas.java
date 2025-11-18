@@ -3,11 +3,15 @@ import baseNoStates.AreaTypes.Partition;
 import baseNoStates.AreaTypes.Space;
 import baseNoStates.Visitors.AreaVisitor;
 import baseNoStates.Visitors.FindAreaById;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public abstract class DirectoryAreas {
+    private static final Logger logger = LoggerFactory.getLogger(DirectoryAreas.class);
+    
     private static Area root = null;
     private static AreaVisitor visitor;
 

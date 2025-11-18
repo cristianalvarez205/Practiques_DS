@@ -9,12 +9,16 @@ import baseNoStates.Visitors.AreaVisitor;
 import baseNoStates.Visitors.GetDoorsGivingAccess;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
 public class RequestArea implements Request {
+  private static final Logger logger = LoggerFactory.getLogger(RequestArea.class);
+  
   private final String credential;
   private final String action;
   private final String areaId;

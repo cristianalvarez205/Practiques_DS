@@ -3,8 +3,12 @@ package baseNoStates;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class DirectoryDoors {
+  private static final Logger logger = LoggerFactory.getLogger(DirectoryDoors.class);
+  
   private static final List<Door> allDoors = new ArrayList<>();
 
   public static void makeDoors() {

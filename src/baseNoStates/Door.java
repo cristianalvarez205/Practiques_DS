@@ -3,8 +3,12 @@ package baseNoStates;
 import baseNoStates.DoorStates.DoorUnlocked;
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Door {
+  private static final Logger logger = LoggerFactory.getLogger(Door.class);
+  
   private final String id;
   private boolean closed;
   private DoorState state;

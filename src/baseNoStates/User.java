@@ -1,8 +1,12 @@
 package baseNoStates;
 
 import java.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class User {
+  private static final Logger logger = LoggerFactory.getLogger(User.class);
+  
   private final String name;
   private final String credential;
   private final UserGroup group;

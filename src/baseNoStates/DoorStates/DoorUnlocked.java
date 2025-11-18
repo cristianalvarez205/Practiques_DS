@@ -2,6 +2,8 @@ package baseNoStates.DoorStates;
 
 import baseNoStates.Door;
 import baseNoStates.DoorState;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents the state of a door being unlocked.
@@ -9,6 +11,8 @@ import baseNoStates.DoorState;
  */
 
 public class DoorUnlocked extends DoorState {
+    private static final Logger logger = LoggerFactory.getLogger(DoorUnlocked.class);
+    
     public DoorUnlocked(Door door){
         super(door);
         stateName = "unlocked";

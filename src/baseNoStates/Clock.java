@@ -4,12 +4,15 @@ import java.time.LocalDateTime;
 import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class implements a SINGLETON pattern with lazy initialization
  **/
 
 public class Clock extends Observable {
+    private static final Logger logger = LoggerFactory.getLogger(Clock.class);
 
     private static Clock instance;
 

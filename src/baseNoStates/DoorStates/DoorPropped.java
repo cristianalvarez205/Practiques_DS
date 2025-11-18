@@ -3,6 +3,8 @@ package baseNoStates.DoorStates;
 import baseNoStates.Actions;
 import baseNoStates.Door;
 import baseNoStates.DoorState;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents the 'propped' state of a door.
@@ -10,6 +12,7 @@ import baseNoStates.DoorState;
  */
 
 public class DoorPropped extends DoorState {
+    private static final Logger logger = LoggerFactory.getLogger(DoorPropped.class);
 
     DoorPropped(Door door){
         super(door);

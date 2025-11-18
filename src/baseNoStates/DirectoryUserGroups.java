@@ -4,11 +4,15 @@ import baseNoStates.UserGroups.Admin;
 import baseNoStates.UserGroups.Employee;
 import baseNoStates.UserGroups.Guest;
 import baseNoStates.UserGroups.Manager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class DirectoryUserGroups {
+  private static final Logger logger = LoggerFactory.getLogger(DirectoryUserGroups.class);
+  
   private static final List<UserGroup> groups = new ArrayList<>();
 
   public static void makeUserGroups() {

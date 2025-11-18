@@ -4,6 +4,8 @@ import baseNoStates.requests.Request;
 import baseNoStates.requests.RequestReader;
 import baseNoStates.requests.RequestRefresh;
 import baseNoStates.requests.RequestArea;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +21,8 @@ import java.util.StringTokenizer;
 // https://www.ssaurel.com/blog/create-a-simple-http-web-server-in-java
 // http://www.jcgonzalez.com/java-socket-mini-server-http-example
 public class WebServer {
+  private static final Logger logger = LoggerFactory.getLogger(WebServer.class);
+  
   private static final int PORT = 8080; // port to listen connection
   private static final DateTimeFormatter formatter =
           DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");

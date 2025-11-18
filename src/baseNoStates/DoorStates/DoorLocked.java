@@ -2,6 +2,7 @@ package baseNoStates.DoorStates;
 
 import baseNoStates.Door;
 import baseNoStates.DoorState;
+import org.slf4j.Logger;
 
 /**
  * Represents a locked state of a door.
@@ -9,6 +10,7 @@ import baseNoStates.DoorState;
  */
 
 public class DoorLocked extends DoorState {
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(DoorLocked.class);
 
     public DoorLocked(Door door){
         super(door);
