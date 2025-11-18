@@ -5,6 +5,10 @@ import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This class implements a SINGLETON pattern with lazy initialization
+ **/
+
 public class Clock extends Observable {
 
     private static Clock instance;
@@ -20,22 +24,30 @@ public class Clock extends Observable {
 
     public static synchronized Clock getInstance() {
       if (instance == null) {
-        instance = new Clock(1); // valor per defecte
+        instance = new Clock(1); // default period (seconds)
       }
       return instance;
     }
 
+    /**
+     * Starts a timer that executes a periodic task.
+     * The task updates the current date/time, prints it to the console,
+     * and notifies all observers with the new date.
+     * The timer starts immediately and repeats every "period" seconds.
+     **/
+
     public void start() {
         TimerTask repeatedTask = new TimerTask() {
             @Override
+            //modify the abstract function of the class TimerTask for our instance repeatedTask
             public void run() {
-                // Instance of anonymous class
                 date = LocalDateTime.now();
                 System.out.println("run() executed at " + date);
                 setChanged();
                 notifyObservers(date);
             }
         };
+        //at some point this function calls run()
         timer.scheduleAtFixedRate(repeatedTask, 0, 1000L * period);
     }
 

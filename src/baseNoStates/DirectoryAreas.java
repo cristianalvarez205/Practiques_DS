@@ -1,11 +1,15 @@
 package baseNoStates;
+import baseNoStates.AreaTypes.Partition;
+import baseNoStates.AreaTypes.Space;
+import baseNoStates.Visitors.AreaVisitor;
+import baseNoStates.Visitors.FindAreaById;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public abstract class DirectoryAreas {
-    private static final List<Area> allAreas = new ArrayList<>();
+    private static Area root = null;
+    private static AreaVisitor visitor;
 
     public static void makeAreas() {
         Door d1 = DirectoryDoors.findDoorById("D1");
@@ -19,7 +23,7 @@ public abstract class DirectoryAreas {
         Door d9 = DirectoryDoors.findDoorById("D9");
 
         Partition building = new Partition("building",null);
-
+        root = building;
         Partition basement = new Partition("basement",building);
         Partition ground_floor = new Partition("ground_floor",building);
         Partition floor1 = new Partition("floor1",building);
@@ -33,33 +37,11 @@ public abstract class DirectoryAreas {
         Space corridor = new Space(new ArrayList<Door>(Arrays.asList(d7)),"corridor",floor1);
         Space room3 = new Space(new ArrayList<Door>(Arrays.asList(d8)),"room3",floor1);
         Space IT = new Space(new ArrayList<Door>(Arrays.asList(d9)),"IT",floor1);
-
-        allAreas.addAll(
-            Arrays.asList(
-                exterior,
-                parking,
-                stairs,
-                hall,
-                room1,
-                room2,
-                corridor,
-                room3,
-                IT,
-                basement,
-                ground_floor,
-                floor1,
-                building
-            )
-        );
     }
 
     public static Area findAreaById(String id) {
-        for (Area area : allAreas) {
-            if (area.getId().equals(id)) {
-                return area;
-            }
-        }
-        System.out.println("area with id " + id + " not found");
-        return null;
+        visitor = new FindAreaById(id);
+        root.acceptVisitor(visitor);
+        return ((FindAreaById)visitor).getTargetArea();
     }
 }

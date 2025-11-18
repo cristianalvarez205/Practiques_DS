@@ -1,18 +1,26 @@
 package baseNoStates;
 
+import baseNoStates.AreaTypes.Partition;
+import baseNoStates.Visitors.AreaVisitor;
+
 import java.util.List;
 
+/**
+ * We use this abstract class to represent a COMPOSITE patters
+ * class partition is the container class
+ * others that extends this class are leafs
+ **/
 public abstract class Area {
-    private final String areaId;
+    protected final String areaId;
 
-    Area(String areaId) {
+    public Area(String areaId, Partition father) {
         this.areaId = areaId;
+        if (father != null) {
+            father.addArea(this);
+        }
     }
 
-  /**
-   * Returns the list of doors that provide access to this area.
-   */
-    public abstract List<Door> getAccessibleDoors();
+    public abstract  void acceptVisitor(AreaVisitor visitor);
 
     public String getId() {
       return areaId;
