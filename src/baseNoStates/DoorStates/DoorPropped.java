@@ -17,31 +17,33 @@ public class DoorPropped extends DoorState {
     DoorPropped(Door door){
         super(door);
         stateName = "propped";
+        logger.warn("Door {} has entered PROPPED state", door.getId());
     }
 
     @Override
     public void lock() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to lock from propped state", door.getId());
     }
 
     @Override
     public void unlock() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to unlock from propped state", door.getId());
     }
 
     @Override
     public void open() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to open from propped state", door.getId());
     }
 
     @Override
     public void close() {
+        logger.info("Door {} changing state: PROPPED -> LOCKED", door.getId());
         door.setState(new DoorLocked(door));
         door.close();
     }
 
     @Override
     public void unlock_shortly() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to unlock_shortly from propped state", door.getId());
     }
 }

@@ -27,9 +27,20 @@ public class User {
   }
 
   public boolean authorize(LocalDateTime now, Door door, String action) {
-      return group.canSendRequests(now) &&
-             group.canBeInSpace(door.getFromSpace()) &&
-             group.canBeInSpace(door.getToSpace()) &&
-             group.canDoAction(action);
+      boolean canSendRequests = group.canSendRequests(now);
+      boolean canBeInFromSpace = group.canBeInSpace(door.getFromSpace());
+      boolean canBeInToSpace = group.canBeInSpace(door.getToSpace());
+      boolean canDoAction = group.canDoAction(action);
+      
+      boolean authorized = canSendRequests && canBeInFromSpace && canBeInToSpace && canDoAction;
+      
+      if (authorized) {
+          logger.info("Authorization SUCCESS: User {} authorized to {} door {}", name, action, door.getId());
+      } else {
+          logger.warn("Authorization FAILED: User {} cannot {} door {} - Reasons: canSendRequests={}, canBeInFromSpace={}, canBeInToSpace={}, canDoAction={}",
+                  name, action, door.getId(), canSendRequests, canBeInFromSpace, canBeInToSpace, canDoAction);
+      }
+      
+      return authorized;
   }
 }

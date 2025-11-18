@@ -28,46 +28,55 @@ public class DoorShortlyUnlocked extends DoorState implements Observer {
         stateName = "unlocked_shortly";
         start = LocalDateTime.now();
         Clock.getInstance().addObserver(this);
+        logger.info("Door {} entered UNLOCKED_SHORTLY state (10 seconds timer started)", door.getId());
     }
 
     private void loadNewState () {
         if (door.isClosed()) {
+            logger.info("Door {} changing state: UNLOCKED_SHORTLY -> LOCKED (timer expired)", door.getId());
             door.setState(new DoorLocked(door));
         }
         else {
+            logger.info("Door {} changing state: UNLOCKED_SHORTLY -> PROPPED (timer expired, door was open)", door.getId());
             door.setState(new DoorPropped(door));
         }
     }
 
     @Override
     public void lock() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to lock from unlocked_shortly state", door.getId());
     }
 
     @Override
     public void unlock() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to unlock from unlocked_shortly state", door.getId());
     }
 
     @Override
     public void open() {
-        if (door.isClosed())
+        if (door.isClosed()) {
+            logger.info("Door {} opening (state: UNLOCKED_SHORTLY)", door.getId());
             door.open();
-        else
-            System.out.println("You are trying to open an already open door.");
+        }
+        else {
+            logger.warn("Door {} - Invalid action: trying to open an already open door", door.getId());
+        }
     }
 
     @Override
     public void close() {
-        if (door.isClosed())
-            System.out.println("You are trying to close a door that is already closed.");
-        else
+        if (door.isClosed()) {
+            logger.warn("Door {} - Invalid action: trying to close a door that is already closed", door.getId());
+        }
+        else {
+            logger.info("Door {} closing (state: UNLOCKED_SHORTLY)", door.getId());
             door.close();
+        }
     }
 
     @Override
     public void unlock_shortly() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to unlock_shortly from unlocked_shortly state", door.getId());
     }
 
     @Override
@@ -80,7 +89,7 @@ public class DoorShortlyUnlocked extends DoorState implements Observer {
         {
             Clock.getInstance().deleteObserver(this);
             loadNewState();
-            System.out.println("The short unlock period has ended.");
+            logger.debug("Door {} - Short unlock period (10s) has ended", door.getId());
         }
 
     }

@@ -45,7 +45,6 @@ public class Clock extends Observable {
             //modify the abstract function of the class TimerTask for our instance repeatedTask
             public void run() {
                 date = LocalDateTime.now();
-                System.out.println("run() executed at " + date);
                 setChanged();
                 notifyObservers(date);
             }

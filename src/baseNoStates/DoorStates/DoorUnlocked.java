@@ -20,37 +20,44 @@ public class DoorUnlocked extends DoorState {
 
     @Override
     public void lock() {
-        if (door.isClosed())
+        if (door.isClosed()) {
+            logger.info("Door {} changing state: UNLOCKED -> LOCKED", door.getId());
             door.setState(new DoorLocked(door));
-        else
-            System.out.println("You are trying to lock an open door.");
+        }
+        else {
+            logger.warn("Door {} - Invalid action: trying to lock an open door", door.getId());
+        }
     }
 
     @Override
     public void unlock() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to unlock an already unlocked door", door.getId());
     }
 
     @Override
     public void open() {
         if (door.isClosed()) {
-            System.out.println("Opening door");
+            logger.info("Door {} opening (state: UNLOCKED)", door.getId());
             door.open();
         }
-        else
-            System.out.println("You are trying to open an already open door.");
+        else {
+            logger.warn("Door {} - Invalid action: trying to open an already open door", door.getId());
+        }
     }
 
     @Override
     public void close() {
-        if (door.isClosed())
-            System.out.println("You are trying to close a door that is already closed.");
-        else
+        if (door.isClosed()) {
+            logger.warn("Door {} - Invalid action: trying to close a door that is already closed", door.getId());
+        }
+        else {
+            logger.info("Door {} closing (state: UNLOCKED)", door.getId());
             door.close();
+        }
     }
 
     @Override
     public void unlock_shortly() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to unlock_shortly from unlocked state", door.getId());
     }
 }

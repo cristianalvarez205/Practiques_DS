@@ -1,0 +1,15 @@
+
+18:00:59 [main] INFO  baseNoStates.DirectoryUserGroups - All user groups created successfully: 4 groups, total users loaded
+18:01:14 [Thread-2] DEBUG baseNoStates.DirectoryUserGroups - Searching for user with credential: 00112
+18:01:14 [Thread-2] WARN  baseNoStates.DirectoryUserGroups - User with credential 00112 not found
+18:01:20 [Thread-3] DEBUG baseNoStates.DirectoryUserGroups - Searching for user with credential: 00112
+18:01:20 [Thread-3] WARN  baseNoStates.DirectoryUserGroups - User with credential 00112 not found
+18:01:25 [Thread-4] DEBUG baseNoStates.DirectoryUserGroups - Searching for user with credential: 00112
+18:01:25 [Thread-4] WARN  baseNoStates.DirectoryUserGroups - User with credential 00112 not found
+18:01:33 [Thread-5] DEBUG baseNoStates.DirectoryUserGroups - Searching for user with credential: 11343
+18:01:33 [Thread-5] DEBUG baseNoStates.DirectoryUserGroups - User found: User{name=Ana, credential=11343} in group Admin
+18:01:33 [Thread-5] INFO  baseNoStates.User - Authorization SUCCESS: User Ana authorized to open door D5
+18:01:33 [Thread-5] INFO  baseNoStates.DoorStates.DoorUnlocked - Door D5 opening (state: UNLOCKED)
+18:01:59 [Thread-6] DEBUG baseNoStates.DirectoryUserGroups - Searching for user with credential: 43295
+18:01:59 [Thread-6] DEBUG baseNoStates.DirectoryUserGroups - User found: User{name=Eulalia, credential=43295} in group Employee
+18:01:59 [Thread-6] WARN  baseNoStates.User - Authorization FAILED: User Eulalia cannot open door D2 - Reasons: canSendRequests=false, canBeInFromSpace=true, canBeInToSpace=false, canDoAction=true

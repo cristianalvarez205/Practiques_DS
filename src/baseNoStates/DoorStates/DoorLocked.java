@@ -19,26 +19,28 @@ public class DoorLocked extends DoorState {
 
     @Override
     public void lock() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to lock an already locked door", door.getId());
     }
 
     @Override
     public void unlock() {
+        logger.info("Door {} changing state: LOCKED -> UNLOCKED", door.getId());
         door.setState(new DoorUnlocked(door));
     }
 
     @Override
     public void open() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to open a locked door", door.getId());
     }
 
     @Override
     public void close() {
-        System.out.println(INVALID_ACTION_MESSAGE);
+        logger.warn("Door {} - Invalid action: trying to close a locked door", door.getId());
     }
 
     @Override
     public void unlock_shortly() {
+        logger.info("Door {} changing state: LOCKED -> UNLOCKED_SHORTLY", door.getId());
         door.setState(new DoorShortlyUnlocked(door));
     }
 }

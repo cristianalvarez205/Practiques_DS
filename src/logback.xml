@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Appender para la consola (STDOUT) -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender para archivo de texto -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs.txt</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender para archivo HTML (opcional, descomentar si prefieres HTML) -->
+    <!--
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.html.HTMLLayout">
+                <pattern>%relative%thread%mdc%level%logger%msg</pattern>
+            </layout>
+        </encoder>
+        <file>logs.html</file>
+    </appender>
+    -->
+
+    <!-- OPCIÓN 1: Solo logs de FITA 1 (Composite, State, Observer, UserGroups) -->
+    <!--
+    <logger name="baseNoStates" level="OFF"/>
+    <logger name="baseNoStates.Door" level="DEBUG"/>
+    <logger name="baseNoStates.DoorStates" level="DEBUG"/>
+    <logger name="baseNoStates.User" level="DEBUG"/>
+    <logger name="baseNoStates.UserGroups" level="DEBUG"/>
+    <logger name="baseNoStates.DirectoryUserGroups" level="DEBUG"/>
+    <logger name="baseNoStates.Clock" level="DEBUG"/>
+    <logger name="baseNoStates.WebServer" level="DEBUG"/>
+    <logger name="baseNoStates.Main" level="DEBUG"/>
+    <logger name="baseNoStates.DirectoryDoors" level="DEBUG"/>
+    <logger name="baseNoStates.requests" level="DEBUG"/>
+    <logger name="baseNoStates.Area" level="DEBUG"/>
+    <logger name="baseNoStates.AreaTypes.Space" level="DEBUG"/>
+    <logger name="baseNoStates.AreaTypes.Partition" level="DEBUG"/>
+    -->
+
+    <!-- OPCIÓN 2: Solo logs de FITA 2 (Visitor, Singleton) -->
+    <!--
+    <logger name="baseNoStates" level="OFF"/>
+    <logger name="baseNoStates.Visitors" level="DEBUG"/>
+    <logger name="baseNoStates.DirectoryAreas" level="DEBUG"/>
+    <logger name="baseNoStates.Clock" level="DEBUG"/>
+    -->
+
+    <!-- OPCIÓN 3: Logs de todas las clases (FITA 1 + FITA 2) -->
+    <logger name="baseNoStates" level="INFO"/>
+
+    <!-- Configuración del root logger -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+
+</configuration>
