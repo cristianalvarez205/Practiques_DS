@@ -13,23 +13,23 @@ import java.util.List;
  * others that extends this class are leafs
  **/
 public abstract class Area {
-    private static final Logger logger = LoggerFactory.getLogger(Area.class);
-    
-    protected final String areaId;
+  private static final Logger logger = LoggerFactory.getLogger(Area.class);
 
-    public Area(String areaId, Partition father) {
-        this.areaId = areaId;
-        if (father != null) {
-            father.addArea(this);
-            logger.debug("Area {} added to partition {}", areaId, father.getId());
-        } else {
-            logger.debug("Root area {} created", areaId);
-        }
+  protected final String areaId;
+
+  public Area(String areaId, Partition father) {
+    this.areaId = areaId;
+    if (father != null) {
+      father.addArea(this);
+      logger.debug("Area {} added to partition {}", areaId, father.getId());
+    } else {
+      logger.debug("Root area {} created", areaId);
     }
+  }
 
-    public abstract  void acceptVisitor(AreaVisitor visitor);
+  public abstract  void acceptVisitor(AreaVisitor visitor);
 
-    public String getId() {
-      return areaId;
-    }
+  public String getId() {
+    return areaId;
+  }
 }

@@ -1,6 +1,5 @@
 package baseNoStates.Visitors;
 
-import baseNoStates.Area;
 import baseNoStates.AreaTypes.Partition;
 import baseNoStates.AreaTypes.Space;
 import baseNoStates.Door;

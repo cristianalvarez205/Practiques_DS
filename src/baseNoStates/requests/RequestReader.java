@@ -1,10 +1,11 @@
 package baseNoStates.requests;
 
-import baseNoStates.*;
-
+import baseNoStates.DirectoryDoors;
+import baseNoStates.DirectoryUserGroups;
+import baseNoStates.Door;
+import baseNoStates.User;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -79,7 +80,8 @@ public class RequestReader implements Request {
   // see if the request is authorized and put this into the request, then send it to the door.
   // if authorized, perform the action.
   public void process() {
-    logger.debug("Processing door request: credential={}, action={}, door={}", credential, action, doorId);
+    logger.debug("Processing door request: credential={}, action={}, door={}",
+        credential, action, doorId);
     User user = DirectoryUserGroups.findUserByCredential(credential);
     Door door = DirectoryDoors.findDoorById(doorId);
     assert door != null : "door " + doorId + " not found";
@@ -89,7 +91,8 @@ public class RequestReader implements Request {
     // even if not authorized we process the request, so that if desired we could log all
     // the requests made to the server as part of processing the request
     doorClosed = door.isClosed();
-    logger.debug("Door request processed: authorized={}, doorState={}, doorClosed={}", authorized, doorStateName, doorClosed);
+    logger.debug("Door request processed: authorized={}, doorState={}, doorClosed={}",
+        authorized, doorStateName, doorClosed);
   }
 
   // the result is put into the request object plus, if not authorized, why not,
@@ -99,7 +102,7 @@ public class RequestReader implements Request {
       authorized = false;
       addReason("user doesn't exist");
     } else {
-      authorized = user.authorize(now,door,action);
+      authorized = user.authorize(now, door, action);
     }
   }
 }

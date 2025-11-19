@@ -15,7 +15,7 @@ public class Door {
   private String fromSpace;
   private String toSpace;
 
-  public Door(String id,String fromSpace,String toSpace) {
+  public Door(String id, String fromSpace, String toSpace) {
     this.id = id;
     closed = true;
     state = new DoorUnlocked(this);
@@ -41,23 +41,23 @@ public class Door {
   private void doAction(String action) {
     switch (action) {
       case Actions.OPEN:
-          state.open();
+        state.open();
         break;
 
       case Actions.CLOSE:
-          state.close();
+        state.close();
         break;
 
       case Actions.LOCK:
-          state.lock();
+        state.lock();
         break;
 
       case Actions.UNLOCK:
-          state.unlock();
+        state.unlock();
         break;
 
       case Actions.UNLOCK_SHORTLY:
-          state.unlock_shortly();
+        state.unlock_shortly();
         break;
 
       default:
@@ -87,11 +87,11 @@ public class Door {
 
   @Override
   public String toString() {
-    return "Door{" +
-        ", id='" + id + '\'' +
-        ", closed=" + closed +
-        ", state=" + getStateName() +
-        '}';
+    return "Door{"
+        + ", id='" + id + '\'' 
+        + ", closed=" + closed
+        + ", state=" + getStateName()
+        + '}';
   }
 
   public JSONObject toJson() {
@@ -102,11 +102,11 @@ public class Door {
     return json;
   }
 
-    public Object getFromSpace() {
+  public Object getFromSpace() {
     return fromSpace;
-    }
+  }
 
-    public Object getToSpace() {
+  public Object getToSpace() {
     return toSpace;
-    }
+  }
 }

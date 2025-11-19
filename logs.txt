@@ -11,3 +11,6 @@
 18:42:47 [Thread-6] INFO  b.Visitors.GetDoorsGivingAccess - Total doors collected: 1
 18:42:52 [Thread-7] INFO  baseNoStates.Visitors.FindAreaById - Found target area (Space): IT
 18:42:52 [Thread-7] INFO  b.Visitors.GetDoorsGivingAccess - Total doors collected: 1
+20:06:44 [main] INFO  baseNoStates.Clock - Clock started with period of 1 seconds
+20:10:36 [Thread-6] INFO  baseNoStates.Visitors.FindAreaById - Found target area (Partition): ground_floor
+20:10:36 [Thread-6] INFO  b.Visitors.GetDoorsGivingAccess - Total doors collected: 4
