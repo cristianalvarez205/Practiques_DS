@@ -1,4 +1,5 @@
 package baseNoStates;
+
 import baseNoStates.AreaTypes.Partition;
 import baseNoStates.AreaTypes.Space;
 import baseNoStates.Visitors.AreaVisitor;

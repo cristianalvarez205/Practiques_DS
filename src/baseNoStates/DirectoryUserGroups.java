@@ -4,11 +4,10 @@ import baseNoStates.UserGroups.Admin;
 import baseNoStates.UserGroups.Employee;
 import baseNoStates.UserGroups.Guest;
 import baseNoStates.UserGroups.Manager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class DirectoryUserGroups {
   private static final Logger logger = LoggerFactory.getLogger(DirectoryUserGroups.class);
@@ -46,7 +45,8 @@ public final class DirectoryUserGroups {
     groups.add(admins);
     logger.debug("Admin group created with 1 user");
     
-    logger.info("All user groups created successfully: {} groups, total users loaded", groups.size());
+    logger.info("All user groups created successfully: {} groups, total users loaded",
+        groups.size());
   }
 
   public static User findUserByCredential(String credential) {

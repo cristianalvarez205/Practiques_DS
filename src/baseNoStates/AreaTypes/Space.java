@@ -1,15 +1,12 @@
 package baseNoStates.AreaTypes;
-
-
 import baseNoStates.Area;
 import baseNoStates.Door;
 import baseNoStates.Visitors.AreaVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 public class Space extends Area {
   private static final Logger logger = LoggerFactory.getLogger(Space.class);

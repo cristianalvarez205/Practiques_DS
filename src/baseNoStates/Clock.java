@@ -44,7 +44,7 @@ public class Clock extends Observable {
     logger.info("Clock started with period of {} seconds", period);
     TimerTask repeatedTask = new TimerTask() {
       @Override
-      //modify the abstract function of the class TimerTask for our instance repeatedTask
+      // modify the abstract function of the class TimerTask for our instance repeatedTask
       public void run() {
         date = LocalDateTime.now();
         logger.debug("Clock tick at {}, notifying observers", date);
@@ -52,7 +52,7 @@ public class Clock extends Observable {
         notifyObservers(date);
       }
     };
-    //at some point this function calls run()
+    // at some point this function calls run()
     timer.scheduleAtFixedRate(repeatedTask, 0, 1000L * period);
   }
 

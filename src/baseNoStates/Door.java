@@ -23,8 +23,8 @@ public class Door {
     this.toSpace = toSpace;
   }
 
-  public void setState(DoorState dS) {
-    state = dS;
+  public void setState(DoorState state) {
+    this.state = state;
   }
 
   public void processRequest(RequestReader request) {

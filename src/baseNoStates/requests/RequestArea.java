@@ -2,7 +2,6 @@ package baseNoStates.requests;
 
 import baseNoStates.Actions;
 import baseNoStates.Area;
-import baseNoStates.AreaTypes.Partition;
 import baseNoStates.DirectoryAreas;
 import baseNoStates.Door;
 import baseNoStates.Visitors.AreaVisitor;
@@ -77,7 +76,8 @@ public class RequestArea implements Request {
   public void process() {
     // commented out until Area, Space and Partition are implemented
 
-    logger.info("Processing area request: credential={}, action={}, area={}", credential, action, areaId);
+    logger.info("Processing area request: credential={}, action={}, area={}",
+        credential, action, areaId);
 
     // make the door requests and put them into the area request to be authorized later and
     // processed later
@@ -85,7 +85,8 @@ public class RequestArea implements Request {
     // an Area is a Space or a Partition
     if (area != null) {
       // is null when from the app we click on an action but no place is selected because
-      // there (flutter) I don't control like I do in javascript that all the parameters are provided
+      // there (flutter) I don't control like I do in javascript that all the parameters
+      // are provided
 
       // Make all the door requests, one for each door in the area, and process them.
       // Look for the doors in the spaces of this area that give access to them.
@@ -100,7 +101,8 @@ public class RequestArea implements Request {
         // to each individual door request, that is read by the simulator/Flutter app
         requests.add(requestReader);
       }
-      logger.info("Area request processed: {} door requests created for area {}", requests.size(), areaId);
+      logger.info("Area request processed: {} door requests created for area {}",
+          requests.size(), areaId);
     }
   }
 }

@@ -5,7 +5,6 @@ import baseNoStates.Visitors.AreaVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 
 /**
  * We use this abstract class to represent a COMPOSITE patters
