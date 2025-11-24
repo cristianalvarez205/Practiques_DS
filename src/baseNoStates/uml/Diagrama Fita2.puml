@@ -1,0 +1,268 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+
+class WebServer {
+- {static} PORT : int
+- {static} FORMATTER : DateTimeFormatter
++ WebServer()
+}
+
+class SocketThread {
+- insocked : Socket
+- makeRequest(tokens : String[]) : Request
+- makeRequestReader(tokens : String[]) : RequestReader
+- makeRequestArea(tokens : String[]) : RequestArea
+- makeHeaderAnswer() : String
+- makeJsonAnswer(request : Request) : String
++ run()
+}
+
+WebServer +-right- SocketThread
+
+note right of SocketThread
+inner class
+of WebServer
+end note
+
+class DirectoryDoors {
++ {static} makeDoors() : void
++ {static} findDoorById(id : String) : Door
++ {static} getAllDoors() : ArrayList<Door>
+}
+
+DirectoryDoors "1" *--> "        1..*" Door : "allDoors"
+
+class DirectoryUserGroups {
++ {static} makeUserGroups() : void
++ {static} findUserByCredential(credential : String) : User
+}
+
+DirectoryUserGroups "1 " *--> "0..*" UserGroup : "groups"
+
+class DirectoryAreas {
+- {static} root : Area
++ {static} makeAreas() : void
++ {static} findAreaById(id : String) : Area
+}
+
+DirectoryAreas "1" --> "1 " Area : "root"
+
+class Door {
+- id : String
+- closed : boolean
+- fromSpace : String
+- toSpace : String
++ Door(id : String, fromSpace : String, toSpace : String)
++ processRequest(request : RequestReader) : void
++ setState(doorState : DoorState) : void
++ toJson() : JSONObject
++ toString() : String
++ isClosed() : boolean
++ open() : void
++ close() : void
++ getId() : String
++ getStateName() : String
++ getFromSpace() : Object
++ getToSpace() : Object
+- doAction(action : String) : void
+}
+
+Door "1 "--> "1" DoorState : "state"
+
+abstract class DoorState {
+# stateName : String
++ DoorState(door : Door)
++ getStateName() : String
++ {abstract} lock() : void
++ {abstract} unlock() : void
++ {abstract} open() : void
++ {abstract} close() : void
++ {abstract} unlock_shortly() : void
+}
+
+DoorState "1"--> "1 " Door : "door"
+
+
+class DoorLocked {
++ DoorLocked(door : Door)
+}
+
+class DoorUnlocked {
++ DoorUnlocked(door : Door)
+}
+
+class DoorShortlyUnlocked {
+- start : LocalDateTime
++ DoorShortlyUnlocked(door : Door)
+- loadNewState() : void
++ update(o : Observable, arg : Object) : void
+- check10s(start : LocalDateTime, arg : LocalDateTime) : void
+}
+
+DoorShortlyUnlocked ..|> Observer
+
+class DoorPropped {
++ DoorPropped(door : Door)
+}
+
+DoorState <|-- DoorLocked
+DoorState <|-- DoorUnlocked
+DoorState <|-- DoorShortlyUnlocked
+DoorState <|-- DoorPropped
+
+abstract class UserGroup {
++ addUser(user : User) : void
++ getUser(credential : String) : User
++ {abstract} canSendRequests(now : LocalDateTime) : boolean
++ {abstract} canBeInSpace(fromSpace : Object) : boolean
++ {abstract} canDoAction(action : String) : boolean
+# isInRange(dateTime : LocalDateTime, start : LocalDateTime, end : LocalDateTime) : boolean
+}
+
+UserGroup "1" *--> "0..*" User : "   users"
+
+class Admin {
+}
+
+class Manager {
+}
+
+class Employee {
+}
+
+class Guest {
+}
+
+UserGroup <|-- Admin
+UserGroup <|-- Manager
+UserGroup <|-- Employee
+UserGroup <|-- Guest
+
+class User {
+- name : String
+- credential : String
++ User(name : String, credential : String, group : UserGroup)
++ getCredential() : String
++ toString() : String
++ authorize(now : LocalDateTime, door : Door, action : String) : boolean
+}
+
+User "0..*"--> "1"UserGroup : "group"
+
+abstract class Area {
+# areaId : String
++ Area(areaId : String, father : Partition)
++ {abstract} acceptVisitor(visitor : AreaVisitor) : void
++ getId() : String
+}
+
+class Space {
+- doors : List<Door>
++ Space(doors : List<Door>, areaId : String, father : Partition)
++ getDoorsGivingAccess() : List<Door>
+}
+
+class Partition {
+- areas : List<Area>
++ Partition(areaId : String, father : Partition)
++ addArea(area : Area) : void
++ getAreas() : List<Area>
+}
+
+Area <|-- Space
+Area <|-- Partition
+Partition "1  " o--> "1..*     " Area : "areas"
+Space "0..1 " o--> "0..* " Door : "doors"
+
+interface AreaVisitor {
++ {abstract} visitSpace(space : Space) : void
++ {abstract} visitPartition(partition : Partition) : void
+}
+
+class FindAreaById {
+- targetId : String
+- targetArea : Area
++ FindAreaById(targetId : String)
++ getTargetArea() : Area
+}
+
+class GetDoorsGivingAccess {
+- doors : List<Door>
++ getDoorsGivingAccess() : List<Door>
+}
+
+class GetProppedDoors {
+}
+
+AreaVisitor <|.. FindAreaById
+AreaVisitor <|.. GetDoorsGivingAccess
+AreaVisitor <|.. GetProppedDoors
+
+note right of AreaVisitor
+Visitor pattern
+to traverse Area hierarchy
+end note
+
+class Actions {
++ {static} LOCK : String
++ {static} UNLOCK : String
++ {static} UNLOCK_SHORTLY : String
++ {static} OPEN : String
++ {static} CLOSE : String
+}
+
+abstract class Observable {
++ addObserver(o : Observer) : void
++ deleteObserver(o : Observer) : void
++ notifyObservers() : void
++ notifyObservers(arg : Object) : void
++ setChanged() : void
+}
+
+Observable "0..*" o--> "0..*" Observer : "observers"
+
+interface Observer {
++ update(o : Observable, arg : Object) : void
+}
+
+class Clock {
+- {static} instance : Clock
+- date : LocalDateTime
+- timer : Timer
+- period : int
+- Clock(period : int)
++ {static} getInstance() : Clock
++ start() : void
++ stop() : void
++ getPeriod() : int
++ getDate() : LocalDateTime
+}
+
+Clock --|> Observable
+
+note right of Clock
+Singleton pattern
+lazy initialization
+end note
+
+class Main {
++ {static} main(args : String[]) : void
+}
+
+note right of Main::main
+clock.start()
+DirectoryDoors.makeDoors()
+DirectoryUserGroups.makeUserGroups()
+DirectoryAreas.makeAreas()
+new WebServer()
+clock.stop()
+end note
+
+Main "1" --> "1" Clock : "clock"
+
+
+Main -[hidden]down- WebServer
+WebServer -[hidden]down- DirectoryDoors
+DirectoryDoors -[hidden]right- DirectoryUserGroups
+@enduml

@@ -24,7 +24,6 @@ public class RequestArea implements Request {
   private final String areaId;
   private final LocalDateTime now;
   private ArrayList<RequestReader> requests = new ArrayList<>();
-  private AreaVisitor visitor;
 
 
   public RequestArea(String credential, String action, LocalDateTime now, String areaId) {
@@ -90,7 +89,7 @@ public class RequestArea implements Request {
 
       // Make all the door requests, one for each door in the area, and process them.
       // Look for the doors in the spaces of this area that give access to them.
-      visitor = new GetDoorsGivingAccess();
+      AreaVisitor visitor = new GetDoorsGivingAccess();
       area.acceptVisitor(visitor);
       List<Door> doorsToProcess = ((GetDoorsGivingAccess)visitor).getDoorsGivingAccess();
       logger.debug("Area {} has {} doors to process", areaId, doorsToProcess.size());

@@ -47,16 +47,15 @@
     -->
 
     <!-- OPCIÓN 2: Solo logs de FITA 2 (Visitor, Singleton) -->
+    <!--
     <logger name="baseNoStates" level="OFF"/>
     <logger name="baseNoStates.Visitors" level="INFO"/>
     <logger name="baseNoStates.DirectoryAreas" level="INFO"/>
     <logger name="baseNoStates.Clock" level="INFO"/>
-
+    -->
 
     <!-- OPCIÓN 3: Logs de todas las clases (FITA 1 + FITA 2) -->
-    <!--
     <logger name="baseNoStates" level="INFO"/>
-    -->
 
     <!-- Configuración del root logger -->
     <root level="INFO">

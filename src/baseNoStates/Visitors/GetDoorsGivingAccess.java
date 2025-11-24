@@ -2,6 +2,7 @@ package baseNoStates.Visitors;
 
 import baseNoStates.AreaTypes.Partition;
 import baseNoStates.AreaTypes.Space;
+import baseNoStates.Area;
 import baseNoStates.Door;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,9 @@ public class GetDoorsGivingAccess implements AreaVisitor {
   @Override
   public void visitPartition(Partition partition) {
     logger.debug("Visiting partition: {}", partition.getId());
+    for (Area area : partition.getAreas()) {
+      area.acceptVisitor(this);
+    }
   }
 
   public List<Door> getDoorsGivingAccess() {

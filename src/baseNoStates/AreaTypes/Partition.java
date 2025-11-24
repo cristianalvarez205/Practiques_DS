@@ -17,14 +17,15 @@ public class Partition extends Area {
     logger.debug("Partition {} created", areaId);
   }
 
+  public List<Area> getAreas() {
+    return areas;
+  }
+
   @Override
   public void acceptVisitor(AreaVisitor visitor) {
     logger.debug("Partition {} accepting visitor {} (will propagate to {} child areas)",
         areaId, visitor.getClass().getSimpleName(), areas.size());
     visitor.visitPartition(this);
-    for (Area area : areas) {
-      area.acceptVisitor(visitor);
-    }
   }
 
   public void addArea(Area area) {

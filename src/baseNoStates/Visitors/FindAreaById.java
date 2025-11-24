@@ -28,9 +28,15 @@ public class FindAreaById implements AreaVisitor {
   @Override
   public void visitPartition(Partition partition) {
     logger.debug("Visiting partition: {}", partition.getId());
+    
     if (targetId.equals(partition.getId())) {
       targetArea = partition;
       logger.info("Found target area (Partition): {}", targetId);
+    }
+    else {
+      for (Area area : partition.getAreas()) {
+        area.acceptVisitor(this);
+      }
     }
   }
 

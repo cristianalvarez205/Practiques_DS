@@ -14,7 +14,6 @@ public abstract class DirectoryAreas {
   private static final Logger logger = LoggerFactory.getLogger(DirectoryAreas.class);
 
   private static Area root = null;
-  private static AreaVisitor visitor;
 
   public static void makeAreas() {
     Door d1 = DirectoryDoors.findDoorById("D1");
@@ -46,7 +45,7 @@ public abstract class DirectoryAreas {
 
   public static Area findAreaById(String id) {
     logger.debug("Searching for area with id: {}", id);
-    visitor = new FindAreaById(id);
+    AreaVisitor visitor = new FindAreaById(id);
     root.acceptVisitor(visitor);
     return ((FindAreaById)visitor).getTargetArea();
   }
